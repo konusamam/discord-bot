@@ -6,7 +6,7 @@ module.exports = (client, msg) => {
 
 	let text = msg.content.toLowerCase()
 
-	let dogical_words = ["d0g", "d0ge", "dogger", "dorg", "dogue", "dorq"]
+	let dogical_words = ["d0g", "d0ge", "dogical", "dogger", "dorg", "dogue", "dorq"]
 	for (let word of dogical_words) {
 		if (text.includes(word)) {
 			msg.channel.send("Doge!!🐕🐕🐕")
@@ -32,5 +32,9 @@ module.exports = (client, msg) => {
 		msg.channel.send("OwO what's this? 😳❓Big red ❤💋meaty steak 🥩🍖 UwU ❤❤ 💖Mmm~ So tasty yummy UwO 😉😘, *licks meat*👅👅 💓💓Unnf UwU tastesss soo gwoood daddy ☺🤩😜~~ What?! ⁉️ EGGS?!?🥚⁉️ :0 😮 UwU *Shakeys wittle baby tail*🐶💖❤ mmm Daddy I Wuuuuv eggs~ 🥚💋💖I Wuuuuuuuv💗 💞 Yo Eggs espweciawy uwo, mmm tastes soooo good~ 💦🤤💙Daddy these eggs are sawty~💖💖 OwO ❤😍 daddy is that a sausage to add to my sawty eggy weggys?💖 🤤🥚💗 Mmm *licks sausage* 👅💦 mmmm soooo good~ 🤤💖🥴 *deepthroatys daddies big thick juicy meat* 😳👅 mmmm daddy this tastes SOOOOO GOOOOOD~ 😜💦💜MMMM OwO UwU~ *Nuzzles you*💗 RAWR 🐯🐻🦁💞")
 	} else if (text == "help") {
 		msg.channel.send("woof woof! I'm a doge.\nLooking for a good time? I'm here for you 😻\nJust use the code word **doggystyle** 💦🍆👉🏿👌🏻")
+	} else if (text.includes("wtf")) {
+		msg.channel.send("dooooooooooooooge", {
+			file: "./images/doge.gif"
+		})
 	}
 }
