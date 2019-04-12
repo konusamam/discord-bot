@@ -1,0 +1,27 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "A discord bot",
+  "main": "discordbot.js",
+  "scripts": {
+    "build": "node discordbot.js",
+    "serve": "nodemon discordbot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaotea/discord-bot.git"
+  },
+  "author": "Chao Cheng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chaotea/discord-bot/issues"
+  },
+  "homepage": "https://github.com/chaotea/discord-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  },
+  "devDependencies": {
+    "dotenv": "^7.0.0",
+    "nodemon": "^1.18.11"
+  }
+}
