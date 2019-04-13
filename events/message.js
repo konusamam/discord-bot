@@ -28,10 +28,10 @@ module.exports = (client, msg) => {
 		msg.channel.send(dogical_reply)
 	} else if (text == "dog") {
 		msg.channel.send("I am no mere dog. I am DOGE.")
+	} else if (text == "help") {
+		msg.channel.send("woof woof! I'm a doge.")
 	} else if (text == "doggystyle") {
 		msg.channel.send("OwO what's this? 😳❓Big red ❤💋meaty steak 🥩🍖 UwU ❤❤ 💖Mmm~ So tasty yummy UwO 😉😘, *licks meat*👅👅 💓💓Unnf UwU tastesss soo gwoood daddy ☺🤩😜~~ What?! ⁉️ EGGS?!?🥚⁉️ :0 😮 UwU *Shakeys wittle baby tail*🐶💖❤ mmm Daddy I Wuuuuv eggs~ 🥚💋💖I Wuuuuuuuv💗 💞 Yo Eggs espweciawy uwo, mmm tastes soooo good~ 💦🤤💙Daddy these eggs are sawty~💖💖 OwO ❤😍 daddy is that a sausage to add to my sawty eggy weggys?💖 🤤🥚💗 Mmm *licks sausage* 👅💦 mmmm soooo good~ 🤤💖🥴 *deepthroatys daddies big thick juicy meat* 😳👅 mmmm daddy this tastes SOOOOO GOOOOOD~ 😜💦💜MMMM OwO UwU~ *Nuzzles you*💗 RAWR 🐯🐻🦁💞")
-	} else if (text == "help") {
-		msg.channel.send("woof woof! I'm a doge.\nLooking for a good time? I'm here for you 😻\nJust use the code word **doggystyle** 💦🍆👉🏿👌🏻")
 	} else if (text.includes("wtf")) {
 		msg.channel.send("dooooooooooooooge", {
 			file: "./images/doge.gif"
