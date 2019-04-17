@@ -31,7 +31,15 @@ module.exports = (client, msg) => {
 	} else if (text.includes("troo")) {
 		msg.channel.send("Trooby dooby doooooooooooooooooooooooooooooooooooooooooooo")
 	} else if (text.includes("tarnation")) {
-		msg.channel.send("What in perfidious albion.")
+		msg.channel.send("Wot in perfidious albion")
+	} else if (text.includes("rip") || text.includes("rop") || text.includes("roop")) {
+		msg.channel.send("Press W to pay Woofspects", {
+			file: "./images/doge.jpg"
+		})
+	} else if (text == "w") {
+		msg.channel.send("```So we beat on,\nboats against the current,\nborne back ceaselessly into the past.```", {
+			file: "./images/wol.jpg"
+		})
 	} else if (text.includes("what")) {
 		msg.channel.send("What's this? UwU", {
 			file: "./images/doge.gif"
@@ -46,6 +54,8 @@ module.exports = (client, msg) => {
 		})
 	} else if (text.includes("nani")) {
 		msg.channel.send("🅱️ani")
+	} else if (text.includes("wait")) {
+		msg.channel.send("Wait wot")
 	} else if (text == "doggystyle") {
 		msg.channel.send("OwO what's this? 😳❓Big red ❤💋meaty steak 🥩🍖 UwU ❤❤ 💖Mmm~ So tasty yummy UwO 😉😘, *licks meat*👅👅 💓💓Unnf UwU tastesss soo gwoood daddy ☺🤩😜~~ What?! ⁉️ EGGS?!?🥚⁉️ :0 😮 UwU *Shakeys wittle baby tail*🐶💖❤ mmm Daddy I Wuuuuv eggs~ 🥚💋💖I Wuuuuuuuv💗 💞 Yo Eggs espweciawy uwo, mmm tastes soooo good~ 💦🤤💙Daddy these eggs are sawty~💖💖 OwO ❤😍 daddy is that a sausage to add to my sawty eggy weggys?💖 🤤🥚💗 Mmm *licks sausage* 👅💦 mmmm soooo good~ 🤤💖🥴 *deepthroatys daddies big thick juicy meat* 😳👅 mmmm daddy this tastes SOOOOO GOOOOOD~ 😜💦💜MMMM OwO UwU~ *Nuzzles you*💗 RAWR 🐯🐻🦁💞")
 	}
