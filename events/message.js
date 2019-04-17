@@ -32,6 +32,8 @@ module.exports = (client, msg) => {
 		msg.channel.send("Trooby dooby doooooooooooooooooooooooooooooooooooooooooooo")
 	} else if (text.includes("tarnation")) {
 		msg.channel.send("Wot in perfidious albion")
+	} else if (text.includes("que")) {
+		msg.channel.send(msg.content + "indeed.")
 	} else if (text.includes("rip") || text.includes("rop") || text.includes("roop")) {
 		msg.channel.send("Press W to pay Woofspects", {
 			file: "./images/doge.jpg"
