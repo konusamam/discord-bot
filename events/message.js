@@ -5,22 +5,27 @@ module.exports = (client, msg) => {
 
 	let text = msg.content.toLowerCase()
 
-	if (text.includes("doge")) {
-		let doge_reply = "Doge"
-		let doge_emojis = ["🐶", "🐨", "🐼", "🦊", "🐻", "🦁", "🐮", "🐷", "🐸", "❤️", "💙", "💜", "💛", "💚", "💖"]
-		let num_doges = text.split("doge").length - 1
-		
-		for (let i = 1; i < num_doges; i++) {
-			doge_reply += "doge"
-		}
-		doge_reply += "!!!!!!!"
+	if (text.includes("despacito")) {
+		msg.channel.send("🎵DES🎵\n🎵PA🎵\n🎵DIGGO🎵\n🎵Quiero respirar tu cuello despadiggo🎵\n🎵Deja que te digga cosas al oído 🎵\n🎵Para que te acuerdes si no estás diggo 🎵")
+		let voiceChannel = msg.member.voiceChannel
+		voiceChannel.join().then(connection => {
+			const dispatcher = connection.playFile("./images/despacito.mp3")
+			dispatcher.on("end", end => {voiceChannel.leave()})
+		}).catch(err => console.log(err))
+		return
+	}
 
-		for (let i = 0; i < (Math.floor(Math.random() * 12) + 5); i++) {
-			doge_reply += doge_emojis[Math.floor(Math.random() * doge_emojis.length)]
-		}
+	if (text.includes("legends never die")) {
+		msg.channel.send("🎵LEGENDS NEVER DIE🎵\n🎵THEY BECOME A PART OF YOU🎵\n🎵EVERY TIME YOU BLEED REACHING FOR GREATNESS🎵\n🎵LEGENDS NEVER DIE🎵")
+		let voiceChannel = msg.member.voiceChannel
+		voiceChannel.join().then(connection => {
+			const dispatcher = connection.playFile("./images/legendsneverdie.mp3")
+			dispatcher.on("end", end => {voiceChannel.leave()})
+		}).catch(err => console.log(err))
+		return
+	}
 
-		msg.channel.send(doge_reply)
-	} else if (text == "dog") {
+	if (text == "dog") {
 		msg.channel.send("I am no mere dog. I am DOGE.")
 	} else if (text.includes("d0g") || text.includes("d0ge")) {
 		msg.channel.send("Doge!!🐕🐕🐕")
@@ -33,14 +38,14 @@ module.exports = (client, msg) => {
 	} else if (text.includes("tarnation")) {
 		msg.channel.send("Wot in perfidious albion")
 	} else if (text.includes("que")) {
-		msg.channel.send(msg.content + "indeed.")
-	} else if (text.includes("rip") || text.includes("rop") || text.includes("roop")) {
+		msg.channel.send(msg.content + " indeed.")
+	} else if (text.includes("rip") || text.includes("rop") || text.includes("roop") || text.includes("rest in peace")) {
 		msg.channel.send("Press W to pay Woofspects", {
 			file: "./images/doge.jpg"
 		})
-	} else if (text == "w") {
+	} else if ((text == "w") || (text == "f")) {
 		msg.channel.send("```So we beat on,\nboats against the current,\nborne back ceaselessly into the past.```", {
-			file: "./images/wol.jpg"
+			file: "./images/ripdoge.jpg"
 		})
 	} else if (text.includes("what")) {
 		msg.channel.send("What's this? UwU", {
@@ -60,5 +65,20 @@ module.exports = (client, msg) => {
 		msg.channel.send("Wait wot")
 	} else if (text == "doggystyle") {
 		msg.channel.send("OwO what's this? 😳❓Big red ❤💋meaty steak 🥩🍖 UwU ❤❤ 💖Mmm~ So tasty yummy UwO 😉😘, *licks meat*👅👅 💓💓Unnf UwU tastesss soo gwoood daddy ☺🤩😜~~ What?! ⁉️ EGGS?!?🥚⁉️ :0 😮 UwU *Shakeys wittle baby tail*🐶💖❤ mmm Daddy I Wuuuuv eggs~ 🥚💋💖I Wuuuuuuuv💗 💞 Yo Eggs espweciawy uwo, mmm tastes soooo good~ 💦🤤💙Daddy these eggs are sawty~💖💖 OwO ❤😍 daddy is that a sausage to add to my sawty eggy weggys?💖 🤤🥚💗 Mmm *licks sausage* 👅💦 mmmm soooo good~ 🤤💖🥴 *deepthroatys daddies big thick juicy meat* 😳👅 mmmm daddy this tastes SOOOOO GOOOOOD~ 😜💦💜MMMM OwO UwU~ *Nuzzles you*💗 RAWR 🐯🐻🦁💞")
+	} else if (text.includes("doge")) {
+		let doge_reply = "Doge"
+		let doge_emojis = ["🐶", "🐨", "🐼", "🦊", "🐻", "🦁", "🐮", "🐷", "🐸", "❤️", "💙", "💜", "💛", "💚", "💖"]
+		let num_doges = text.split("doge").length - 1
+
+		for (let i = 1; i < num_doges; i++) {
+			doge_reply += "doge"
+		}
+		doge_reply += "!!!!!!!"
+
+		for (let i = 0; i < (Math.floor(Math.random() * 12) + 5); i++) {
+			doge_reply += doge_emojis[Math.floor(Math.random() * doge_emojis.length)]
+		}
+
+		msg.channel.send(doge_reply)
 	}
 }

@@ -1,4 +1,3 @@
-require("dotenv").config()
 const Discord = require("discord.js")
 const fs = require("fs")
 
@@ -12,4 +11,4 @@ fs.readdir("./events/", (err, files) => {
 	})
 })
 
-client.login(process.env.TOKEN)
+client.login(DISCORD_TOKEN)
