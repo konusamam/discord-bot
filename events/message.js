@@ -1,5 +1,5 @@
 module.exports = (client, msg) => {
-	// Professional Rapper
+	// Ignore own messages unless Professional Rapper
 	if (msg.author.id == client.user.id && msg.content.startsWith("```")) {
 		if (msg.content.includes("❓ Right now?")) {
 			let filter = reaction => reaction.emoji.name == "❓" || reaction.emoji.name == "👎"
@@ -131,10 +131,7 @@ module.exports = (client, msg) => {
 					msg.channel.send("Dog, why didn't you react? :(")
 				})
 		}
-	}
-
-	// Ignore own messages
-	if (msg.author.id == client.user.id) {
+	} else if (msg.author.id == client.user.id) {
 		return
 	}
 
@@ -145,8 +142,27 @@ module.exports = (client, msg) => {
 		msg.channel.send(msg.content + " indeed.")
 	}
 
-	// Ignore messages that don't start with doge (except for above case)
+	// Echo back -oo and -ical messages as well
+	if (text.endsWith("oo") || text.endsWith("ical")) {
+		msg.channel.send("Troogical")
+	}
+
+	// Prompt a command if only "doge"
+	if (text == "doge") {
+		let doge_reply = "Doge! "
+		let doge_emojis = ["🐶", "🐨", "🐼", "🦊", "🐻", "🦁", "🐮", "🐷", "🐸", "❤️", "💙", "💜", "💛", "💚", "💖"]
+		for (let i = 0; i < 5; i++) {
+			doge_reply += doge_emojis[Math.floor(Math.random() * doge_emojis.length)]
+		}
+		msg.channel.send(doge_reply)
+		msg.channel.send("Use **doge help** for a list of commands!")
+	}
+
+	// Ignore messages that don't start with doge (except for above cases)
 	if (!text.startsWith("doge ")) {
+		if (text.includes("d0ge")) {
+			msg.channel.send("I am **DOGE**, you disgusting heathen.")
+		}
 		return
 	}
 
@@ -176,61 +192,25 @@ module.exports = (client, msg) => {
 			break
 		default:
 			msg.channel.send("Roop, I couldn't find " + msg.content.slice(10) + " in my playlist. 😪")
+			msg.channel.send("Here are the songs I know:")
+			msg.channel.send("`Despacito`")
+			msg.channel.send("`Legends Never Die`")
+			msg.channel.send("`Professional Rapper`")
 		}
-	}
-
-	if (text == "dog") {
-		msg.channel.send("I am no mere dog. I am DOGE.")
-	} else if (text.includes("d0g") || text.includes("d0ge")) {
-		msg.channel.send("Doge!!🐕🐕🐕")
 	} else if (text == "help") {
-		msg.channel.send("woof woof! I'm a doge.")
-	} else if (text.includes("dogical")) {
-		msg.channel.send("Troogical")
-	} else if (text.includes("troo")) {
-		msg.channel.send("Trooby dooby doooooooooooooooooooooooooooooooooooooooooooo")
-	} else if (text.includes("tarnation")) {
-		msg.channel.send("Wot in perfidious albion")
-	} else if (text.includes("rip") || text.includes("rop") || text.includes("roop") || text.includes("rest in peace")) {
-		msg.channel.send("Press W to pay Woofspects", {
-			file: "./images/doge.jpg"
-		})
-	} else if ((text == "w") || (text == "f")) {
-		msg.channel.send("```So we beat on,\nboats against the current,\nborne back ceaselessly into the past.```", {
-			file: "./images/ripdoge.jpg"
-		})
-	} else if (text.includes("what")) {
-		msg.channel.send("What's this? UwU", {
-			file: "./images/doge.gif"
-		})
-	} else if (text.includes("wot")) {
-		msg.channel.send("Wot's this? UwU", {
-			file: "./images/doge.gif"
-		})
-	} else if (text.includes("w0t")) {
-		msg.channel.send("W0t's this? UwU", {
-			file: "./images/doge.gif"
-		})
-	} else if (text.includes("nani")) {
-		msg.channel.send("🅱️ani")
-	} else if (text.includes("wait")) {
-		msg.channel.send("Wait wot")
+		msg.channel.send("Woof woof! I'm a doge.")
+		msg.channel.send("Here are the tricks I know:")
+		msg.channel.send("`Play *song*:` plays a song from my playlist")
+		msg.channel.send("`Edit:` edit my commands")
+	} else if (text == "edit") {
+		msg.channel.send({embed: {
+			color: 3447003,
+			title: "Edit my commands",
+			url: "https://youtu.be/dQw4w9WgXcQ"
+		}})
 	} else if (text == "doggystyle") {
 		msg.channel.send("OwO what's this? 😳❓Big red ❤💋meaty steak 🥩🍖 UwU ❤❤ 💖Mmm~ So tasty yummy UwO 😉😘, *licks meat*👅👅 💓💓Unnf UwU tastesss soo gwoood daddy ☺🤩😜~~ What?! ⁉️ EGGS?!?🥚⁉️ :0 😮 UwU *Shakeys wittle baby tail*🐶💖❤ mmm Daddy I Wuuuuv eggs~ 🥚💋💖I Wuuuuuuuv💗 💞 Yo Eggs espweciawy uwo, mmm tastes soooo good~ 💦🤤💙Daddy these eggs are sawty~💖💖 OwO ❤😍 daddy is that a sausage to add to my sawty eggy weggys?💖 🤤🥚💗 Mmm *licks sausage* 👅💦 mmmm soooo good~ 🤤💖🥴 *deepthroatys daddies big thick juicy meat* 😳👅 mmmm daddy this tastes SOOOOO GOOOOOD~ 😜💦💜MMMM OwO UwU~ *Nuzzles you*💗 RAWR 🐯🐻🦁💞")
-	} else if (text.includes("doge")) {
-		let doge_reply = "Doge"
-		let doge_emojis = ["🐶", "🐨", "🐼", "🦊", "🐻", "🦁", "🐮", "🐷", "🐸", "❤️", "💙", "💜", "💛", "💚", "💖"]
-		let num_doges = text.split("doge").length - 1
-
-		for (let i = 1; i < num_doges; i++) {
-			doge_reply += "doge"
-		}
-		doge_reply += "!!!!!!!"
-
-		for (let i = 0; i < (Math.floor(Math.random() * 12) + 5); i++) {
-			doge_reply += doge_emojis[Math.floor(Math.random() * doge_emojis.length)]
-		}
-
-		msg.channel.send(doge_reply)
+	} else {
+		msg.channel.send(`Roop, I didn't understand this command: **${msg.content.slice(5)}**`)
 	}
 }
