@@ -6,8 +6,9 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "❓") {
+						msg.channel.send(":man::skin-tone-2:: Right now?")
 						msg.channel.send(":man::skin-tone-5:: Yeah")
-						msg.channel.send("```md\n👍 Sure.\n(react to this message)```")
+						msg.channel.send("```md\n👍 Sure\n(react to this message)```")
 					} else {
 						msg.channel.send(`${collected.first().users.first()} Wrong answer, dog`)
 					}
@@ -15,11 +16,12 @@ module.exports = (client, msg) => {
 				.catch(() => {
 					msg.channel.send("Dog, why didn't you react? :(")
 				})
-		} else if (msg.content.includes("👍 Sure.")) {
+		} else if (msg.content.includes("👍 Sure")) {
 			let filter = reaction => reaction.emoji.name == "👍"
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "👍") {
+						msg.channel.send(":man::skin-tone-2:: Sure")
 						msg.channel.send(":man::skin-tone-5:: Dope\n:man::skin-tone-5:: Juanita, bring some weed in here, please\n:man::skin-tone-5:: Thank you")
 						msg.channel.send(":information_desk_person::skin-tone-5:‍: You got it, Snoop\n:information_desk_person::skin-tone-5:‍: I'll be right there")
 						msg.channel.send("```md\n👏 Thanks, Juanita! (Super nice woman)\n(react to this message)```")
@@ -33,6 +35,7 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "👏") {
+						msg.channel.send(":man::skin-tone-2:: Thanks, Juanita! (Super nice woman)")
 						msg.channel.send(":man::skin-tone-5:: Diggo, why does everything you say sound so *soft*?")
 						msg.channel.send("```md\n😠 Fuck you, diggo\n😞 Uh, I really don’t wanna be spoken to like that, so...\n(react to this message)```")
 					}
@@ -45,6 +48,7 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "😞") {
+						msg.channel.send(":man::skin-tone-2:: Uh, I really don’t wanna be spoken to like that, so...")
 						msg.channel.send(":man::skin-tone-5:: Yeah, whatever")
 						msg.channel.send(":information_desk_person::skin-tone-5:‍: Heyyyyy I got y'all your weed")
 						msg.channel.send("```md\n🌿 Damn, that’s some great looking weed... it’s just so early...\n(react to this message)```")
@@ -60,6 +64,7 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "🌿") {
+						msg.channel.send(":man::skin-tone-2:: Damn, that’s some great looking weed... it’s just so early...")
 						msg.channel.send(":information_desk_person::skin-tone-5:‍: Can I get you guys anything else while I’m here? Coffee? Tea? Head? Bottled water?")
 						msg.channel.send("```md\n☕️ Coffee\n🍵 Tea\n❗ D-Did you just say head??\n💧 Water\n(react to this message)```")
 					}
@@ -72,6 +77,7 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "❗") {
+						msg.channel.send(":man::skin-tone-2:: D-Did you just say head??")
 						msg.channel.send(":information_desk_person::skin-tone-5:‍: Yeah. You ain’t never got no head before?")
 						msg.channel.send("```md\n🤔 I mean... just feels like... a lot... right now...\n😔 Nope\n(react to this message)```")
 					} else {
@@ -86,6 +92,7 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "🤔") {
+						msg.channel.send(":man::skin-tone-2:: I mean... just feels like... a lot... right now...")
 						msg.channel.send(":information_desk_person::skin-tone-5:‍: ...OK")
 						msg.channel.send("```md\n❓ But what kind of tea do you guys have?\n(react to this message)```")
 					} else {
@@ -100,6 +107,7 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "❓") {
+						msg.channel.send(":man::skin-tone-2:: But what kind of tea do you guys have?")
 						msg.channel.send(":information_desk_person::skin-tone-5:‍: We got mint, raspberry, Earl Grey, English breakfast")
 						msg.channel.send("```md\n🌱 Mint\n🍒 Raspberry \n🎩 Earl Grey\n🍴 English breakfast\n😏 Actually, I’ll take head\n(react to this message)```")
 					}
@@ -112,7 +120,9 @@ module.exports = (client, msg) => {
 			msg.awaitReactions(filter, {max: 1, time: 60000})
 				.then(collected => {
 					if (collected.first().emoji.name == "😏") {
-						msg.channel.send(":no_good::skin-tone-5:‍: I knew yo dirty lil' ass wanted some head.")
+						msg.channel.send(":man::skin-tone-2:: Actually, I’ll take head")
+						msg.channel.send(":no_good::skin-tone-5:‍: I knew yo dirty lil' ass wanted some head")
+						msg.channel.send(`${collected.first().users.first()} You sly dog`)
 					} else {
 						msg.channel.send(`${collected.first().users.first()} Wrong answer, dog`)
 					}
