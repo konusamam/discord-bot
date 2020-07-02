@@ -148,26 +148,38 @@ module.exports = (client, msg) => {
 	}
 
 	// Prompt a command if only "doge"
-	if (text == "doge") {
-		let doge_reply = "Doge! "
+	// if (text == "doge") {
+	// 	let doge_reply = "Doge! "
+	// 	let doge_emojis = ["🐶", "🐨", "🐼", "🦊", "🐻", "🦁", "🐮", "🐷", "🐸", "❤️", "💙", "💜", "💛", "💚", "💖"]
+	// 	for (let i = 0; i < 5; i++) {
+	// 		doge_reply += doge_emojis[Math.floor(Math.random() * doge_emojis.length)]
+	// 	}
+	// 	msg.channel.send(doge_reply)
+	// 	msg.channel.send("Use **doge help** for a list of commands!")
+	// }
+
+	// Prompt a command if only "doge"
+	if (text == "dogick") {
+		let doge_reply = "Dogick! "
 		let doge_emojis = ["🐶", "🐨", "🐼", "🦊", "🐻", "🦁", "🐮", "🐷", "🐸", "❤️", "💙", "💜", "💛", "💚", "💖"]
 		for (let i = 0; i < 5; i++) {
 			doge_reply += doge_emojis[Math.floor(Math.random() * doge_emojis.length)]
 		}
 		msg.channel.send(doge_reply)
-		msg.channel.send("Use **doge help** for a list of commands!")
 	}
 
 	// Ignore messages that don't start with doge (except for above cases)
-	if (!text.startsWith("doge ")) {
+	if (!text.startsWith("dogick ")) {
 		if (text.includes("d0ge")) {
-			msg.channel.send("I am **DOGE**, you disgusting heathen.")
+			msg.channel.send("I am **DOGICK**, you disgusting heathen.")
+		} else if (text.includes("doge")) {
+			msg.channel.send("I am **DOGICK**, you disgusting heathen.")
 		}
 		return
 	}
 
 	// Strip doge keyword from the rest of the command
-	text = text.slice(5)
+	text = text.slice(7)
 
 	if (text.startsWith("play ")) {
 		text = text.slice(5)
