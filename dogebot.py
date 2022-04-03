@@ -116,13 +116,13 @@ async def jungle_duty(ctx, *args):
                     if int(args[2]) > 0:
                         if args[0] == "assign":
                             jungle_duty_dict[args[1]] += int(args[2])
-                            jd = f"<@{doge_ids[args[1]]}> is hereby sentenced to {args[2]} game{'s' if args[2] != 1 else None} of jungle duty!"
+                            jd = f"<@{doge_ids[args[1]]}> is hereby sentenced to {args[2]} game{'s' if args[2] != '1' else None} of jungle duty!"
                             res = f"{jd}\n<@{doge_ids[args[1]]}> has {jungle_duty_dict[args[1]]} sentences remaining."
                             await ctx.channel.send(res)
                         else:
                             if int(args[2]) <= jungle_duty_dict[args[1]]:
                                 jungle_duty_dict[args[1]] -= int(args[2])
-                                jd = f"Let the almighty d0ge bear witness that <@{doge_ids[args[1]]}> has completed {args[2]} game{'s' if args[2] != 1 else None} of jungle duty!"
+                                jd = f"Let the almighty d0ge bear witness that <@{doge_ids[args[1]]}> has completed {args[2]} game{'s' if args[2] != '1' else None} of jungle duty!"
                                 res = f"{jd}\n<@{doge_ids[args[1]]}> has {jungle_duty_dict[args[1]]} sentences remaining."
                                 await ctx.channel.send(res)
                             else:
