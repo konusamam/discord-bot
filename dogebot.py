@@ -77,6 +77,10 @@ async def on_message(message):
             await message.channel.send(response)
     await bot.process_commands(message)
 
+@bot.command()
+async def say(ctx, *args):
+	await ctx.channel.send(f"{' '.join(args)}")
+
 @bot.command(name="jungleduty")
 async def jungle_duty(ctx, *args):
     if len(args) == 0:
