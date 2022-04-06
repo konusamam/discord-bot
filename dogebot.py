@@ -57,6 +57,14 @@ responses = [
     "d00000ge"
 ]
 
+dogical_responses = [
+    ("Long time no see, ", " ", "🥺"),
+    ("I've missed you, ", " ", "😉😘"),
+    ("Hey ", ", u wnt sum fook?? 😜🍆 ", "💦"),
+    ("Oh my d0ge, it's ", " ", "❗️"),
+    ("Scooby dooby ", ", where are th0ge ", "🐶")
+]
+
 jungle_duty_dict = {
     LEBLANC: 0,
     URGOT: 0,
@@ -76,7 +84,16 @@ bot = commands.Bot(
 async def on_message(message):
     if message.author != bot.user:
         if message.content.startswith("dog") or message.content.startswith("d0g"):
-            response = "d00000000000000000000000000ge0ge!!!! 🐶🐶🐶" if message.author.id == URGOT_ID else random.choice(responses)
+            response = None
+            if message.author.id == URGOT_ID:
+                doge_str = f"d{'0' * random.randint(3,15)}ge"
+                if random.random() < 0.1:
+                    doge_str += "0ge!!!!!"
+                else:
+                    temp = random.choice(dogical_responses)
+                    response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
+            else:
+                response = random.choice(responses)
             await message.channel.send(response)
     await bot.process_commands(message)
 
