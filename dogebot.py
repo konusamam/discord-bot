@@ -7,6 +7,7 @@ from discord.ext import commands
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 SERVER = os.getenv("DISCORD_SERVER")
+CHANNEL = int(os.getenv("DISCORD_CHANNEL"))
 
 LEBLANC = os.getenv("LEBLANC")
 MORDEKAISER= os.getenv("MORDEKAISER")
@@ -22,8 +23,7 @@ VAYNE_ID = int(os.getenv("VAYNE_ID"))
 KASSADIN_ID = int(os.getenv("KASSADIN_ID"))
 URGOT_ID = int(os.getenv("URGOT_ID"))
 
-help_message = """```
-jungleduty
+jungle_help = """
   - choose
         randomly pick a doge to carry out the jungle duty sentence
   - list
@@ -32,7 +32,6 @@ jungleduty
         assign the chosen doge to [number] games of jungle duty
   - complete [doge] [number]
         complete [number] games from the official scroll for the chosen doge
-```
 """
 
 doge_ids = {
@@ -67,7 +66,11 @@ jungle_duty_dict = {
     KASSADIN: 0
 }
 
-bot = commands.Bot(command_prefix="!", help_command=None)
+help_command = commands.DefaultHelpCommand(no_category="dogeb0t commands")
+bot = commands.Bot(
+    command_prefix=commands.when_mentioned_or('!'),
+    help_command=help_command
+)
 
 @bot.event
 async def on_message(message):
@@ -77,14 +80,29 @@ async def on_message(message):
             await message.channel.send(response)
     await bot.process_commands(message)
 
-@bot.command()
+@bot.command(
+	help="Repeats the message you sent back to you",
+	brief="Repeats the message you sent"
+)
 async def say(ctx, *args):
 	await ctx.channel.send(f"{' '.join(args)}")
 
-@bot.command(name="jungleduty")
+@bot.command(
+    help="Whispers the message you sent in the main channel",
+    brief="Whispers the message in the main channel"
+)
+async def whisper(ctx, *args):
+    channel = bot.get_channel(CHANNEL)
+    await channel.send(f"{' '.join(args)}")
+
+@bot.command(
+    name="jungleduty",
+    help=jungle_help,
+    brief="Keeps track of jungle duties. Type !help jungleduty for more info"
+)
 async def jungle_duty(ctx, *args):
     if len(args) == 0:
-        await ctx.channel.send(help_message)
+        await ctx.channel.send(f"```jungleduty {jungle_help}```")
     elif len(args) == 1:
         if args[0] == "choose":
             chosen_jungler = random.choice(list(doge_ids.keys()))
