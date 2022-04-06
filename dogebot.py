@@ -82,7 +82,7 @@ async def on_message(message):
 
 @bot.command(
 	help="Repeats the message you sent back to you",
-	brief="Repeats the message you sent"
+	brief="Repeats the message you sent back to you"
 )
 async def say(ctx, *args):
 	await ctx.channel.send(f"{' '.join(args)}")
@@ -94,6 +94,14 @@ async def say(ctx, *args):
 async def whisper(ctx, *args):
     channel = bot.get_channel(CHANNEL)
     await channel.send(f"{' '.join(args)}")
+
+@bot.command(
+    help="Speaks the message you sent in the main channel using /tts",
+    brief="Speaks the message in the main channel"
+)
+async def speak(ctx, *args):
+    channel = bot.get_channel(CHANNEL)
+    await channel.send(f"{' '.join(args)}", tts=True)
 
 @bot.command(
     name="jungleduty",
