@@ -128,6 +128,13 @@ async def fuk_tony(ctx, *args):
     for _ in range(random.randint(3, 10)):
         await ctx.channel.send(res)
 
+@bot.command()
+async def fuk_wozard(ctx, *args):
+    channel = bot.get_channel(CHANNEL)
+    res = f"fuck you <@{KASSADIN_ID}>"
+    for _ in range(random.randint(3, 10)):
+        await ctx.channel.send(res)
+
 @bot.command(
     name="jungleduty",
     help=jungle_help,
