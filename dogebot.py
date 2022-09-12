@@ -122,18 +122,13 @@ async def speak(ctx, *args):
 
 
 @bot.command()
-async def fuk_tony(ctx, *args):
+async def fuk(ctx, *args):
     channel = bot.get_channel(CHANNEL)
-    res = f"fuck you <@{URGOT_ID}>"
-    for _ in range(random.randint(3, 10)):
-        await ctx.channel.send(res)
-
-@bot.command()
-async def fuk_wozard(ctx, *args):
-    channel = bot.get_channel(CHANNEL)
-    res = f"fuck you <@{KASSADIN_ID}>"
-    for _ in range(random.randint(3, 10)):
-        await ctx.channel.send(res)
+    if args[0] in doge_ids:
+        summoner_id = doge_ids[args[0]]
+        res = f"fuck you <@{summoner_id}>"
+        for _ in range(random.randint(5, 10)):
+            await ctx.channel.send(res)
 
 @bot.command(
     name="jungleduty",
@@ -178,7 +173,7 @@ async def jungle_duty(ctx, *args):
                     if int(args[2]) > 0:
                         if args[0] == "assign":
                             jungle_duty_dict[args[1]] += int(args[2])
-                            jd = f"<@{doge_ids[args[1]]}> is hereby sentenced to {args[2]} game{'s' if args[2] != '1' else None} of jungle duty!"
+                            jd = f"<@{doge_ids[args[1]]}> is hereby sentenced to {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
                             res = f"{jd}\n<@{doge_ids[args[1]]}> has {jungle_duty_dict[args[1]]} sentences remaining."
                             await ctx.channel.send(res)
                         else:
