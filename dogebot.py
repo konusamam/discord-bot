@@ -230,7 +230,7 @@ async def jungle_duty(ctx, *args):
                                     ExpressionAttributeValues={":g": games},
                                     ReturnValues="UPDATED_NEW"
                                 )
-                                sentence = f"Let the almighty d0ge bear witness that <@{doge_ids[args[1]]}> has completed {args[2]} game{'s' if args[2] != '1' else None} of jungle duty!"
+                                sentence = f"Let the almighty d0ge bear witness that <@{doge_ids[args[1]]}> has completed {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
                                 res = f"{sentence}\n<@{doge_ids[args[1]]}> has {games} sentences remaining."
                                 await ctx.channel.send(res)
                             else:
