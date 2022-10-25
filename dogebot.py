@@ -86,7 +86,7 @@ responses = ["d0ge", "d0ge?", "d0ge!", "d0gon", "d0got", "d0gox", "d0gito", "d0g
 dogical_responses = [
     ("Long time no see, ", " ", "🥺"),
     ("I've missed you, ", " ", "😉😘"),
-    ("Hey ", ", u wnt sum fook?? 😜🍆 ", "💦"),
+    ("Hey ", ", you're looking quite dogical tonight ", "😜💦"),
     ("Oh my d0ge, it's ", " ", "❗️"),
     ("Scooby dooby ", ", where are th0ge ", "🐶")
 ]
@@ -95,16 +95,11 @@ dogical_responses = [
 async def on_message(message):
     if message.author != bot.user:
         if message.content.startswith("dog") or message.content.startswith("d0g"):
-            response = None
+            response = random.choice(responses)
             if message.author.id == URGOT_ID:
-                doge_str = f"d{'0' * random.randint(3,15)}ge"
-                if random.random() < 0.1:
-                    doge_str += "0ge!!!!!"
-                else:
-                    temp = random.choice(dogical_responses)
-                    response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
-            else:
-                response = random.choice(responses)
+                doge_str = f"d{'0' * random.randint(2,5)}ge"
+                temp = random.choice(dogical_responses)
+                response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
             await message.channel.send(response)
     await bot.process_commands(message)
 
@@ -152,6 +147,8 @@ async def fuk(ctx, *args):
     if args[0] in doge_ids:
         summoner_id = doge_ids[args[0]]
         res = f"fuck you <@{summoner_id}>"
+        if len(args) >= 2 and args[1] == "*":
+            res = f"FUCK YOU <@{summoner_id}>"
         for _ in range(random.randint(5, 10)):
             await ctx.channel.send(res)
 
