@@ -34,6 +34,9 @@ KASSADIN_ID = int(os.getenv("KASSADIN_ID"))
 URGOT_ID = int(os.getenv("URGOT_ID"))
 EZREAL_ID = int(os.getenv("EZREAL_ID"))
 
+str1 = os.getenv("STR1")
+str2 = os.getenv("STR2")
+
 # Map username to ID
 doge_ids = {
     LEBLANC: LEBLANC_ID,
@@ -46,6 +49,11 @@ doge_ids = {
 }
 
 
+# Lowercase dicts for case-insensitive lookup
+doge_ids_lower = {k.lower(): v for k, v in doge_ids.items()}
+doge_names_lower = {k.lower(): k for k in doge_ids.keys()}
+
+
 # Connect to AWS DynamoDB
 client = boto3.client(
     "dynamodb",
@@ -53,14 +61,12 @@ client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
-
 dynamodb = boto3.resource(
     "dynamodb",
     aws_access_key_id=AWS_ACCESS_KEY_ID,
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
-
 table = dynamodb.Table("jungleduty")
 
 
@@ -77,6 +83,18 @@ bot = commands.Bot(
 )
 
 
+# Helper method for looking up doge names
+def lookup_doge(name):
+    if name.lower() not in doge_ids_lower:
+        return None
+    
+    doge = {
+        "name": doge_names_lower[name.lower()],
+        "id": doge_ids_lower[name.lower()]
+    }
+    return doge
+
+
 # ------------------
 #      COMMANDS
 # ------------------
@@ -91,13 +109,14 @@ dogical_responses = [
     ("Scooby dooby ", ", where are th0ge ", "🐶")
 ]
 
+
 @bot.event
 async def on_message(message):
     if message.author != bot.user:
         if message.content.startswith("dog") or message.content.startswith("d0g"):
             response = random.choice(responses)
             if message.author.id == URGOT_ID:
-                doge_str = f"d{'0' * random.randint(2,5)}ge"
+                doge_str = f"d{'0' * random.randint(3,10)}ge"
                 temp = random.choice(dogical_responses)
                 response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
             await message.channel.send(response)
@@ -140,15 +159,15 @@ async def speak(ctx, *args):
 
 
 @bot.command(
-    help="Fuk [insert doge]",
-    brief="Fuk [insert doge]"
+    help="f [insert doge]",
+    brief="f [insert doge]"
 )
-async def fuk(ctx, *args):
-    if args[0] in doge_ids:
-        summoner_id = doge_ids[args[0]]
-        res = f"fuck you <@{summoner_id}>"
+async def f(ctx, *args):
+    doge = lookup_doge(args[0])
+    if doge:
+        res = f"{str1} <@{doge['id']}>"
         if len(args) >= 2 and args[1] == "*":
-            res = f"FUCK YOU <@{summoner_id}>"
+            res = f"{str1.upper()} <@{doge['id']}>"
         for _ in range(random.randint(5, 10)):
             await ctx.channel.send(res)
 
@@ -171,6 +190,7 @@ jungle_help = """
 async def jungle_duty(ctx, *args):
     if len(args) == 0:
         await ctx.channel.send(f"```jungleduty {jungle_help}```")
+
     elif len(args) == 1:
         if args[0] == "choose":
             chosen_jungler = random.choice(list(doge_ids.keys()))
@@ -182,67 +202,86 @@ async def jungle_duty(ctx, *args):
             res = f"```SCROLL OF JUNGLE DUTIES\n{s}```"
             await ctx.channel.send(res)
         else:
-            await ctx.channel.send(f"\"{args[0]}\" is an invalid argument, retoge.")
-    elif len(args) == 2:
-        if args[0] in ["choose", "list", "assign", "complete"]:
-            if args[1] in doge_ids:
-                if args[0] == "choose":
-                    res = f"<@{doge_ids[args[1]]}> is the new jungler! May summoner's rift tremble at {args[1]}'s might."
-                    await ctx.channel.send(res)
-                elif args[0] == "list":
-                    request = table.get_item(Key={"name": args[1]})
-                    await ctx.channel.send(f"<@{doge_ids[args[1]]}> has {request['Item']['games']} sentences remaining.")
-                elif args[0] == "assign":
-                    await ctx.channel.send(f"You must provide a number to assign to {args[1]}, retoge.")
-                else:
-                    await ctx.channel.send(f"You must provide a number to complete for {args[1]}, retoge.")
-            else:
-                await ctx.channel.send(f"Wait wot? who is {args[1]}?")
-        else:
-            await ctx.channel.send(f"\"{args[0]}\" is an invalid argument, retoge.")
-    elif len(args) == 3:
-        if args[0] == "assign" or args[0] == "complete":
-            if args[1] in doge_ids:
-                if args[2].isdigit():
-                    if int(args[2]) > 0:
-                        request = table.get_item(Key={"name": args[1]})
-                        games = request["Item"]["games"]
-                        if args[0] == "assign":
-                            games += int(args[2])
-                            table.update_item(
-                                Key={"name": args[1]},
-                                UpdateExpression="set games = :g",
-                                ExpressionAttributeValues={":g": games},
-                                ReturnValues="UPDATED_NEW"
-                            )
-                            sentence = f"<@{doge_ids[args[1]]}> is hereby sentenced to {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
-                            res = f"{sentence}\n<@{doge_ids[args[1]]}> has {games} sentences remaining."
-                            await ctx.channel.send(res)
-                        else:
-                            if int(args[2]) <= games:
-                                games -= int(args[2])
-                                table.update_item(
-                                    Key={"name": args[1]},
-                                    UpdateExpression="set games = :g",
-                                    ExpressionAttributeValues={":g": games},
-                                    ReturnValues="UPDATED_NEW"
-                                )
-                                sentence = f"Let the almighty d0ge bear witness that <@{doge_ids[args[1]]}> has completed {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
-                                res = f"{sentence}\n<@{doge_ids[args[1]]}> has {games} sentences remaining."
-                                await ctx.channel.send(res)
-                            else:
-                                await ctx.channel.send(f"{args[1]} cannot complete more games than he is assigned, retoge.")
-                    else:
-                        await ctx.channel.send(f"The number of has to be greater than 0, retoge.")
-                else:
-                    await ctx.channel.send(f"{args[2]} isn't a number, retoge.")
-            else:
-                await ctx.channel.send(f"Wait wot? who is {args[1]}?")
-        else:
-            await ctx.channel.send(f"\"{args[0]}\" is an invalid argument, retoge.")
-    else:
-        await ctx.channel.send(f"wot\n(invalid number of arguments)")
+            await ctx.channel.send(f"\"{args[0]}\" is an invalid argument, {str2}.")
 
- 
+    elif len(args) == 2:
+        doge = lookup_doge(args[1])
+
+        # Invalid username
+        if not doge:
+            await ctx.channel.send(f"Wait wot? who is {args[1]}?")
+            return
+
+        if args[0] == "choose":
+            res = f"<@{doge['id']}> is the new jungler! May summoner's rift tremble at {doge['name']}'s might."
+            await ctx.channel.send(res)
+        elif args[0] == "list":
+            request = table.get_item(Key={"name": doge["name"]})
+            await ctx.channel.send(f"<@{doge['id']}> has {request['Item']['games']} sentences remaining.")
+        elif args[0] == "assign":
+            await ctx.channel.send(f"You must provide a number to assign to {doge['name']}, {str2}.")
+        elif args[0] == "complete":
+            await ctx.channel.send(f"You must provide a number to complete for {doge['name']}, {str2}.")
+        else:
+            await ctx.channel.send(f"\"{args[0]}\" is an invalid argument, {str2}.")
+
+
+    elif len(args) == 3:
+        doge = lookup_doge(args[1])
+
+        # Invalid username
+        if not doge:
+            await ctx.channel.send(f"Wait wot? who is {args[1]}?")
+            return
+
+        # Invalid argument
+        if args[0] != "assign" and args[0] != "complete":
+            await ctx.channel.send(f"\"{args[0]}\" is an invalid argument, {str2}.")
+            return
+
+        # Invalid number of games
+        if int(args[2]) <= 0:
+            await ctx.channel.send(f"The number of games has to be greater than 0, {str2}.")
+            return
+        elif not args[2].isdigit():
+            await ctx.channel.send(f"{args[2]} isn't a number, {str2}.")
+            return
+
+        # Perform update
+        request = table.get_item(Key={"name": doge["name"]})
+        games = request["Item"]["games"]
+
+        if args[0] == "assign":
+            if doge["id"] == VAYNE_ID and games + int(args[2]) > 5:
+                await ctx.channel.send(f"Heathen! You are not allowed to assign more than 5 games of jungle duty to {doge['name']}, for he is an honourable doge and is not deserving of such treachery.")
+                return
+                
+            games += int(args[2])
+            table.update_item(
+                Key={"name": doge["name"]},
+                UpdateExpression="set games = :g",
+                ExpressionAttributeValues={":g": games},
+                ReturnValues="UPDATED_NEW"
+            )
+            sentence = f"<@{doge['id']}> is hereby sentenced to {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
+            res = f"{sentence}\n<@{doge['id']}> has {games} sentence{'s' if games != 1 else ''} remaining."
+            await ctx.channel.send(res)
+        else:
+            if int(args[2]) > games:
+                await ctx.channel.send(f"{doge['name']} cannot complete more games than he is assigned, {str2}.")
+                return
+
+            games -= int(args[2])
+            table.update_item(
+                Key={"name": doge['name']},
+                UpdateExpression="set games = :g",
+                ExpressionAttributeValues={":g": games},
+                ReturnValues="UPDATED_NEW"
+            )
+            sentence = f"Let the almighty d0ge bear witness that <@{doge['id']}> has completed {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
+            res = f"{sentence}\n<@{doge['id']}> has {games} sentence{'s' if games != 1 else ''} remaining."
+            await ctx.channel.send(res)
+
+
 # Run bot
 bot.run(TOKEN)
