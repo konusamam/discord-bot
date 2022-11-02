@@ -252,10 +252,6 @@ async def jungle_duty(ctx, *args):
         games = request["Item"]["games"]
 
         if args[0] == "assign":
-            if doge["id"] == VAYNE_ID and games + int(args[2]) > 5:
-                await ctx.channel.send(f"Heathen! You are not allowed to assign more than 5 games of jungle duty to {doge['name']}, for he is an honourable doge and is not deserving of such treachery.")
-                return
-                
             games += int(args[2])
             table.update_item(
                 Key={"name": doge["name"]},
