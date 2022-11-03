@@ -75,10 +75,12 @@ intents = discord.Intents.default()
 intents.members = True
 
 help_command = commands.DefaultHelpCommand(no_category="dogeb0t commands")
+activity = discord.Activity(type=discord.ActivityType.listening, name="the d0ges")
 
 bot = commands.Bot(
-    command_prefix=commands.when_mentioned_or('!'),
+    command_prefix=commands.when_mentioned_or("!"),
     help_command=help_command,
+    activity=activity,
     intents=intents
 )
 
