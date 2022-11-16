@@ -13,6 +13,9 @@ load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 SERVER = os.getenv("DISCORD_SERVER")
 CHANNEL = int(os.getenv("DISCORD_CHANNEL"))
+VC1 = int(os.getenv("DISCORD_VOICE_CHANNEL_1"))
+VC2 = int(os.getenv("DISCORD_VOICE_CHANNEL_2"))
+VC3 = int(os.getenv("DISCORD_VOICE_CHANNEL_3"))
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
@@ -158,6 +161,46 @@ async def whisper(ctx, *args):
 async def speak(ctx, *args):
     channel = bot.get_channel(CHANNEL)
     await channel.send(f"{' '.join(args)}", tts=True)
+
+
+@bot.command()
+async def join_voice_channel(ctx, *args):
+    channel_id = 0
+
+    if len(args) != 1:
+        return
+    elif args[0] == "a":
+        channel_id = VC1
+    elif args[0] == "p":
+        channel_id = VC2
+    elif args[0] == "t":
+        channel_id = VC3
+
+    if not channel_id:
+        return
+    
+    vc = bot.get_channel(channel_id)
+    await vc.connect()
+
+
+@bot.command()
+async def leave_voice_channel(ctx, *args):
+    channel_id = 0
+
+    if len(args) != 1:
+        return
+    elif args[0] == "a":
+        channel_id = VC1
+    elif args[0] == "p":
+        channel_id = VC2
+    elif args[0] == "t":
+        channel_id = VC3
+
+    if not channel_id:
+        return
+    
+    vc = bot.get_channel(channel_id)
+    await vc.disconnect()
 
 
 @bot.command(
