@@ -114,6 +114,23 @@ dogical_responses = [
     ("Scooby dooby ", ", where are th0ge ", "🐶")
 ]
 
+comrade_text = """
+COMRADES, brothers and sisters, doges of our Army and Navy!
+My words are addressed to you, dear doges!
+The perfidious military attack by Hitlerite Germany on our Dogeland, begun on June 22, is continuing. In spite of the heroic resistance of the Doge Army, and although the enemy’s finest divisions and finest air force units have already been smashed and have met their doom on the field of battle, the enemy continues to push forward, hurling fresh forces to the front. Hitler’s troops have succeeded in capturing Lithuania, a considerable part of Latvia, the western part of Byelorussia and part of Western Ukraine. The fascist aircraft are extending the range of their operations, bombing Murmansk, Orsha, Moghilev, Smolensk, Kiev, Odessa, Sevastopol. Grave danger overhangs our country.
+How could it have happened that our glorious Doge Army surrendered a number of our cities and districts to the fascist armies? Is it really true that the German-fascist troops are invincible, as the braggart fascist propagandists are ceaselessly blaring forth?
+Of course not! **History shows that there are no invincible armies and never have been.** Napoleon’s army was considered invincible, but it was beaten successively by the armies of Russia, England and Germany. Kaiser Wilhelm’s German army in the period of the First Imperialist War was also considered invincible, but it was beaten several times by Russian and Anglo-French troops, and was finally smashed by the Anglo-French forces. The same must be said of Hitler’s German-fascist army of to-day. This army had not yet met with serious resistance on the continent of Europe. Only on our territory has it met with serious resistance. And if as a result of this resistance the finest divisions of Hitler’s German-fascist army have been defeated by our Doge Army, this means that it too can be smashed and will be smashed, as were the armies of Napoleon and Wilhelm.
+The Doge Army, Doge Navy and all citizens of the Doge Union must defend every inch of Soviet soil, must fight to the last drop of blood for our towns and villages, must display the daring, initiative and mental alertness that are inherent in our people.
+We must organize all-round assistance to the Doge Army, ensure powerful reinforcements for its ranks and the supply of everything it requires; we must organize the rapid transport of troops and military freight and extensive aid to the wounded.
+We must strengthen the Doge Army’s rear, subordinating all our work to this end; all our industries must be got to work with greater intensity, to produce more rifles, machine-guns, guns, cartridges, shells, planes; we must organize the guarding of factories, power stations, telephonic and telegraphic communications, and arrange effective air-raid protection in all localities.
+We must wage a ruthless fight against all disorganizers of the rear, deserters, panic-mongers and rumour-mongers; we must exterminate spies, sabotage agents and enemy parachutists, rendering rapid aid in all this to our extermination battalions. We must bear in mind that the enemy is crafty, unscrupulous, experienced in deception and the dissemination of false rumours. We must reckon with all this and not fall victims to stratagem. All who by their panic-mongering and cowardice hinder the work of defence, no matter who they may be, must be immediately haled before a military tribunal.
+Comrades, our forces are numberless. The overweening enemy will soon learn this to his cost. Side by side with the Doge Army many thousands of workers, collective farmers and intellectuals are rising to fight the enemy aggressor. The masses of our people will rise up in their millions. The working people of Moscow and Leningrad have already begun to form huge People’s Guards in support of the Doge Army. Such People’s Guards must be raised in every city which is in danger of enemy invasion; all the working people must be roused to defend with their lives their freedom, their honour and their country in this patriotic war against German fascism.
+In order to ensure the rapid mobilization of all the forces of the peoples of the U.S.S.R. and to repulse the enemy who has treacherously attacked our country, a State Committee of Defence has been formed and the entire state authority has now been vested in it. The State Committee of Defence has entered on the performance of its functions and calls upon all our people to rally around the Party of Lenin and Stalin and around the Soviet Government, so as to render self sacrificing support to the Doge Army and Doge Navy, to exterminate the enemy and secure victory.
+All our forces for the support of our heroic Doge Army and our glorious Doge Navy!
+All the forces of the people for the destruction of the enemy!
+Forward to victory and Doge!
+"""
+
 
 @bot.event
 async def on_message(message):
@@ -125,6 +142,9 @@ async def on_message(message):
                 temp = random.choice(dogical_responses)
                 response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
             await message.channel.send(response)
+        elif message.content.startswith("comrade"):
+            for line in comrade_text.split("\n"):
+                await message.channel.send(line)
     await bot.process_commands(message)
 
 
@@ -322,7 +342,7 @@ async def jungle_duty(ctx, *args):
             sentence = f"Let the almighty d0ge bear witness that <@{doge['id']}> has completed {args[2]} game{'s' if args[2] != '1' else ''} of jungle duty!"
             res = f"{sentence}\n<@{doge['id']}> has {games} sentence{'s' if games != 1 else ''} remaining."
             await ctx.channel.send(res)
-
+        
 
 # Run bot
 bot.run(TOKEN)
