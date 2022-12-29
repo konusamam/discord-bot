@@ -144,7 +144,8 @@ async def on_message(message):
             await message.channel.send(response)
         elif message.content.startswith("comrade"):
             for line in comrade_text.split("\n"):
-                await message.channel.send(line)
+                if line:
+                    await message.channel.send(line)
     await bot.process_commands(message)
 
 
