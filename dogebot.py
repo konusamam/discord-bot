@@ -78,7 +78,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 help_command = commands.DefaultHelpCommand(no_category="dogeb0t commands")
-activity = discord.Activity(type=discord.ActivityType.listening, name="the d0ges")
+activity = discord.Activity(type=discord.ActivityType.listening, name="Soviet March")
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("!"),
@@ -136,11 +136,12 @@ Forward to victory and Doge!
 async def on_message(message):
     if message.author != bot.user:
         if message.content.startswith("dog") or message.content.startswith("d0g"):
-            response = random.choice(responses)
-            if message.author.id == URGOT_ID:
-                doge_str = f"d{'0' * random.randint(3,10)}ge"
-                temp = random.choice(dogical_responses)
-                response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
+            # response = random.choice(responses)
+            # if message.author.id == URGOT_ID:
+            #     doge_str = f"d{'0' * random.randint(3,10)}ge"
+            #     temp = random.choice(dogical_responses)
+            #     response = f"{temp[0]}{doge_str}{temp[1]}{temp[2] * random.randint(1,5)}"
+            response = "Comrade Doge, reporting for duty!"
             await message.channel.send(response)
         elif message.content.startswith("comrade"):
             for line in comrade_text.split("\n"):
