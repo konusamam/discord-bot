@@ -39,6 +39,7 @@ EZREAL_ID = int(os.getenv("EZREAL_ID"))
 
 str1 = os.getenv("STR1")
 str2 = os.getenv("STR2")
+str3 = os.getenv("STR3")
 
 # Map username to ID
 doge_ids = {
@@ -78,7 +79,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 help_command = commands.DefaultHelpCommand(no_category="dogeb0t commands")
-activity = discord.Activity(type=discord.ActivityType.listening, name="Soviet March")
+activity = discord.Activity(type=discord.ActivityType.listening, name=f"{LEBLANC} {str3}")
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("!"),
