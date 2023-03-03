@@ -79,7 +79,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 help_command = commands.DefaultHelpCommand(no_category="dogeb0t commands")
-activity = discord.Activity(type=discord.ActivityType.listening, name="tony schlorping")
+activity = discord.Activity(type=discord.ActivityType.listening, name="tony schlorping chao's juicy asshole")
 
 bot = commands.Bot(
     command_prefix=commands.when_mentioned_or("!"),
